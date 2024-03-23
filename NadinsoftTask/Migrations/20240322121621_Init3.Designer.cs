@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NadinsoftTask.Models.DataBase;
 
@@ -10,9 +11,11 @@ using NadinsoftTask.Models.DataBase;
 namespace NadinsoftTask.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240322121621_Init3")]
+    partial class Init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace NadinsoftTask.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NadinsoftTask.Models.Entity.Product", b =>
+            modelBuilder.Entity("NadinsoftTask.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,9 +39,8 @@ namespace NadinsoftTask.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ManufacturePhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<short>("ManufacturePhone")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -1,17 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using NadinsoftTask.Models.Entity;
 
 namespace NadinsoftTask.Models.DataBase
 {
     public class DatabaseContext:DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
         {
 
-
-            optionsBuilder.UseSqlServer("Data Source=EHSAN;Initial Catalog=NadinsoftTask;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
-            base.OnConfiguring(optionsBuilder);
         }
+
+        #region DbSet
         public DbSet<Product> Products { get; set; }
+
+        #endregion
+
     }
 }

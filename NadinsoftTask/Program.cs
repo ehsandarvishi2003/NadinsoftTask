@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using NadinsoftTask.Models.DataBase;
+using NadinsoftTask.Models.Repository;
 
 namespace NadinsoftTask
 {
@@ -15,9 +16,25 @@ namespace NadinsoftTask
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            #region Connection String
+            string ConnectionString = "Data Source=EHSAN;Initial Catalog=NadinsoftTask;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
+            builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DatabaseContext>(options =>
+            options.UseSqlServer(ConnectionString));
+            #endregion
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+
+            #region Inject Services and Ripositoreis
+
+            builder.Services.AddScoped<ProductRepository, ProductRepository>();
+
+            #endregion
+
             builder.Services.AddSwaggerGen();
+
+            #region Api Versioning
 
             builder.Services.AddApiVersioning(options =>
             {
@@ -29,6 +46,8 @@ namespace NadinsoftTask
                     new HeaderApiVersionReader("X-Version"),
                     new MediaTypeApiVersionReader("ver"));
             });
+
+            #endregion
 
             var app = builder.Build();
             
