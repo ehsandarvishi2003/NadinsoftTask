@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NadinsoftTask</name>
+    </assembly>
+    <members>
+        <member name="T:NadinsoftTask.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:NadinsoftTask.Migrations.Init3">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.Init3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:NadinsoftTask.Migrations.ChageTypeOfPhone">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.ChageTypeOfPhone.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.ChageTypeOfPhone.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.ChageTypeOfPhone.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:NadinsoftTask.Migrations.AddProductDatePropertie">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.AddProductDatePropertie.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.AddProductDatePropertie.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Migrations.AddProductDatePropertie.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinsoftTask.Models.Repository.ProductRepository.GetAllProducts">
+            <summary>
+            دریافت تمامی محصولات
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NadinsoftTask.Models.Repository.ProductRepository.GetById(System.Int32)">
+            <summary>
+            دریافت محصول به کمک آدی
+            </summary>
+            <param name="Id">آیدی محصول</param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinsoftTask.Models.Repository.ProductRepository.Add(NadinsoftTask.Models.ViewModels.ProductViewModel)">
+            <summary>
+            ایجاد محصول
+            </summary>
+            <param name="product">اطلاعات محصول</param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinsoftTask.Models.Repository.ProductRepository.Edit(NadinsoftTask.Models.Entity.Product)">
+            <summary>
+            ویرایش اطلاعات محصول
+            </summary>
+            <param name="product">آیدی محصول</param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinsoftTask.Models.Repository.ProductRepository.Delete(System.Int32)">
+            <summary>
+            حذف محصول
+            </summary>
+            <param name="id">آیدی محصول</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

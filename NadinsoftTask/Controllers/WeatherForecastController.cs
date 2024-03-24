@@ -5,7 +5,7 @@ namespace NadinsoftTask.Controllers
     [ApiController]
     //[Route("api/v{version:apiversion}/[controller]")]
     [Route("[controller]")]
-    [ApiVersion("1",Deprecated =false)]
+    [ApiVersion("2",Deprecated =false)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

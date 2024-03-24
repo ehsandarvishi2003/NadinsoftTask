@@ -17,6 +17,10 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Get All
+        /// <summary>
+        /// دریافت تمامی محصولات
+        /// </summary>
+        /// <returns></returns>
         public List<Product> GetAllProducts() 
         { 
             return _context.Products.ToList();
@@ -25,7 +29,11 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Get by Id
-
+        /// <summary>
+        /// دریافت محصول به کمک آدی
+        /// </summary>
+        /// <param name="Id">آیدی محصول</param>
+        /// <returns></returns>
         public Product GetById(int Id)
         {
             Product product = _context.Products.SingleOrDefault(p => p.Id == Id);
@@ -35,6 +43,11 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Add{Post}
+        /// <summary>
+        /// ایجاد محصول
+        /// </summary>
+        /// <param name="product">اطلاعات محصول</param>
+        /// <returns></returns>
         public Product Add(ProductViewModel product)
         {
             var model = new Product() 
@@ -52,7 +65,11 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Edite{Pot}
-
+        /// <summary>
+        /// ویرایش اطلاعات محصول
+        /// </summary>
+        /// <param name="product">آیدی محصول</param>
+        /// <returns></returns>
         public bool Edit(Product product)
         {
             if(product != null)
@@ -72,6 +89,11 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Delete
+        /// <summary>
+        /// حذف محصول
+        /// </summary>
+        /// <param name="id">آیدی محصول</param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
             if(id != null)

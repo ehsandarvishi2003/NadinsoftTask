@@ -1,9 +1,12 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using NadinsoftTask.Models.DataBase;
 using NadinsoftTask.Models.Repository;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace NadinsoftTask
 {
@@ -32,7 +35,25 @@ namespace NadinsoftTask
 
             #endregion
 
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c=>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NadinSoftTask", Version = "v1" });
+                c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NadinSoftTask", Version = "v2" });
+                c.SwaggerDoc("v3", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NadinSoftTask", Version = "v3" });
+                c.DocInclusionPredicate((doc, apiDescription) =>
+                {
+                    if (!apiDescription.TryGetMethodInfo(out MethodInfo methodInfo)) return false;
+
+                    var version = methodInfo.DeclaringType
+                        .GetCustomAttributes<ApiVersionAttribute>(true)
+                        .SelectMany(attr => attr.Versions);
+
+                    return version.Any(v => $"v{v.ToString()}" == doc);
+                });
+
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "NadinSoftTask.xml"), true);
+                //نتونستم فایل xml ایجاد کنم تا کامنت هایی که کردم توی swagger ui نمایش داده بشه
+            });
 
             #region Api Versioning
 
@@ -55,7 +76,12 @@ namespace NadinsoftTask
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiSample v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApiSample v2");
+                    c.SwaggerEndpoint("/swagger/v3/swagger.json", "WebApiSample v3");
+                });
             }
 
             app.UseHttpsRedirection();
