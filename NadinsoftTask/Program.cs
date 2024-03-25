@@ -21,9 +21,11 @@ namespace NadinsoftTask
             builder.Services.AddControllers();
 
             #region Connection String
+
             string ConnectionString = "Data Source=EHSAN;Initial Catalog=NadinsoftTask;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
             builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(ConnectionString));
+
             #endregion
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,7 +37,14 @@ namespace NadinsoftTask
 
             #endregion
 
-            builder.Services.AddSwaggerGen(c=>
+            builder.Services.AddAntiforgery(options =>
+            {
+                options.DefaultAuthentacateScheme=
+            });
+
+            #region Sowagger Version control and ui hinter
+
+            builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NadinSoftTask", Version = "v1" });
                 c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "NadinSoftTask", Version = "v2" });
@@ -50,18 +59,21 @@ namespace NadinsoftTask
 
                     return version.Any(v => $"v{v.ToString()}" == doc);
                 });
+                //نمایش ورژن های api و جداسازی اونها توی رابط کاربری sowagger
 
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "NadinSoftTask.xml"), true);
                 //نتونستم فایل xml ایجاد کنم تا کامنت هایی که کردم توی swagger ui نمایش داده بشه
             });
 
+            #endregion
+
             #region Api Versioning
 
             builder.Services.AddApiVersioning(options =>
             {
-                options.AssumeDefaultVersionWhenUnspecified=true; // وقتی هیچ ورژنی تعریف نشده بود بیاد دیفالت ورژن رو روش اعمال بکنه
-                options.DefaultApiVersion = new ApiVersion(1,0);
-                options.ReportApiVersions= true;
+                options.AssumeDefaultVersionWhenUnspecified = true; // وقتی هیچ ورژنی تعریف نشده بود بیاد دیفالت ورژن رو روش اعمال بکنه
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
                 options.ApiVersionReader = ApiVersionReader.Combine(
                     new QueryStringApiVersionReader("api-version"),
                     new HeaderApiVersionReader("X-Version"),
@@ -71,16 +83,16 @@ namespace NadinsoftTask
             #endregion
 
             var app = builder.Build();
-            
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiSample v1");
-                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApiSample v2");
-                    c.SwaggerEndpoint("/swagger/v3/swagger.json", "WebApiSample v3");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApi v2");
+                    c.SwaggerEndpoint("/swagger/v3/swagger.json", "WebApi v3");
                 });
             }
 
