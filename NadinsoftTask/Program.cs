@@ -21,9 +21,11 @@ namespace NadinsoftTask
             builder.Services.AddControllers();
 
             #region Connection String
+
             string ConnectionString = "Data Source=EHSAN;Initial Catalog=NadinsoftTask;Integrated Security=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
             builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(ConnectionString));
+
             #endregion
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,6 +36,8 @@ namespace NadinsoftTask
             builder.Services.AddScoped<ProductRepository, ProductRepository>();
 
             #endregion
+
+            #region Sowagger Version control and ui hinter
 
             builder.Services.AddSwaggerGen(c=>
             {
@@ -50,10 +54,13 @@ namespace NadinsoftTask
 
                     return version.Any(v => $"v{v.ToString()}" == doc);
                 });
+                //نمایش ورژن های api و جداسازی اونها توی رابط کاربری sowagger
 
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "NadinSoftTask.xml"), true);
                 //نتونستم فایل xml ایجاد کنم تا کامنت هایی که کردم توی swagger ui نمایش داده بشه
             });
+
+            #endregion
 
             #region Api Versioning
 
