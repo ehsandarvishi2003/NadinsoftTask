@@ -17,6 +17,7 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Get All
+
         /// <summary>
         /// دریافت تمامی محصولات
         /// </summary>
@@ -29,6 +30,7 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Get by Id
+
         /// <summary>
         /// دریافت محصول به کمک آدی
         /// </summary>
@@ -43,6 +45,7 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Add{Post}
+
         /// <summary>
         /// ایجاد محصول
         /// </summary>
@@ -65,6 +68,7 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Edite{Pot}
+
         /// <summary>
         /// ویرایش اطلاعات محصول
         /// </summary>
@@ -89,6 +93,7 @@ namespace NadinsoftTask.Models.Repository
         #endregion
 
         #region Delete
+
         /// <summary>
         /// حذف محصول
         /// </summary>
