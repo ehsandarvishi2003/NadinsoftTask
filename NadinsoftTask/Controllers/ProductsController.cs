@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using NadinsoftTask.Models.Entity;
 using NadinsoftTask.Models.Repository;
 using NadinsoftTask.Models.ViewModels;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,6 +20,8 @@ namespace NadinsoftTask.Controllers
     [Authorize]
     public class ProductsController : ControllerBase
     {
+
+
         #region Ctor
 
         private readonly ProductRepository _productRepository;
@@ -88,5 +96,6 @@ namespace NadinsoftTask.Controllers
         }
 
         #endregion
+
     }
 }
