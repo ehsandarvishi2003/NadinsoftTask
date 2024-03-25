@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NadinsoftTask.Models.Entity;
 using NadinsoftTask.Models.Repository;
 using NadinsoftTask.Models.ViewModels;
@@ -10,6 +11,7 @@ namespace NadinsoftTask.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1", Deprecated = false)]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         #region Ctor

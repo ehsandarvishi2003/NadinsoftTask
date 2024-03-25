@@ -1,18 +1,32 @@
 ﻿
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NadinsoftTask.Models.DataBase;
 using NadinsoftTask.Models.Repository;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
+using System.Text;
 
 namespace NadinsoftTask
 {
     public class Program
     {
-        public static void Main(string[] args)
+        #region Import Configoration data
+
+        public Program(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        #endregion
+
+        public static void Main(string[] args, IConfiguration configuration)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +48,24 @@ namespace NadinsoftTask
             builder.Services.AddScoped<ProductRepository, ProductRepository>();
 
             #endregion
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(c =>
+            {
+                c.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidIssuer = configuration["JsonWebTokenConfig:issuer"],
+                    ValidAudience = configuration["JsonWebTokenConfig:audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JsonWebTokenConfig:key"])),
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+            });
 
             builder.Services.AddSwaggerGen(c=>
             {
@@ -78,16 +110,17 @@ namespace NadinsoftTask
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiSample v1");
-                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApiSample v2");
-                    c.SwaggerEndpoint("/swagger/v3/swagger.json", "WebApiSample v3");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApi v2");
+                    c.SwaggerEndpoint("/swagger/v3/swagger.json", "WebApi v3");
                 });
             }
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

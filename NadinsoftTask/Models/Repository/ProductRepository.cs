@@ -50,10 +50,11 @@ namespace NadinsoftTask.Models.Repository
         /// <returns></returns>
         public Product Add(ProductViewModel product)
         {
-            var model = new Product() 
+            var model = new Product()
             {
-                Name=product.Name,
-                ManufacturePhone=product.ManufacturePhone,
+                Name = product.Name,
+                ProductDate = DateTime.Now,
+                ManufacturePhone =product.ManufacturePhone,
                 ManufactureEmail=product.ManufactureEmail,
                 IsAvailable=product.IsAvailable
             };
